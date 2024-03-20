@@ -12,34 +12,31 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  createUser(@Body() newUser: UserDto): Promise<User> { 
+  createUser(@Body() newUser: UserDto): Promise<UserDto> { 
     return this.userService.createUser(newUser);
   }
 
   @Get()
-  findAll(@Req() request: Request): Promise<User[]> { 
-    console.log(request.query)
+  findAll(@Req() request: Request): Promise<UserDto[]> { 
     return this.userService.findAll(request.query);
      
   }
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<User> {
-    return this.userService.findone(id);
+  findOne(@Param('id') id: string): Promise<UserDto> {
+    return this.userService.findOne(id);
   }
-
-  
 
   @Put(':id')
   updateUser(
     @Param('id') id: string,
     @Body() newUser: UserDto, 
-  ): Promise<User> {
+  ): Promise<UserDto> {
     return this.userService.updateUser(id, newUser);
   }
 
   
   @Delete(':id')
-  deleteBook(@Param('id') id: string): Promise<User> {
+  deleteUser(@Param('id') id: string): Promise<void> {
     return this.userService.deleteUser(id);
   }
   
